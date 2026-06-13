@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>श्रुतिका 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #1a0a2e;
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Floating petals */
+    .petal {
+      position: fixed;
+      top: -40px;
+      font-size: 1.4rem;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.7;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Stars background */
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50%       { opacity: 0.9; transform: scale(1.4); }
+    }
+
+    /* Main card */
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 182, 220, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      padding: 56px 48px;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(200, 100, 200, 0.15), 0 0 120px rgba(150, 50, 200, 0.1);
+      animation: cardIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .emoji-top {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      display: block;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.12); }
+    }
+
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 4.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #f9a8d4, #c084fc, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c084fc, transparent);
+      margin: 20px auto;
+      border-radius: 2px;
+    }
+
+    .message {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+      color: #f3e8ff;
+      line-height: 1.85;
+      letter-spacing: 0.3px;
+      animation: fadeIn 2s ease 0.6s both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .flower {
+      margin-top: 28px;
+      font-size: 1.6rem;
+      letter-spacing: 8px;
+      animation: fadeIn 2s ease 1s both;
+    }
+
+    /* Glow orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift ease-in-out infinite alternate;
+    }
+    .orb1 {
+      width: 300px; height: 300px;
+      background: rgba(192, 132, 252, 0.18);
+      top: -80px; left: -80px;
+      animation-duration: 8s;
+    }
+    .orb2 {
+      width: 250px; height: 250px;
+      background: rgba(249, 168, 212, 0.15);
+      bottom: -60px; right: -60px;
+      animation-duration: 10s;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(30px, 30px); }
+    }
+
+    /* Ripple click effect */
+    .card:active {
+      transform: scale(0.99);
+      transition: transform 0.1s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Glow orbs -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <!-- Main Card -->
+  <div class="card">
+    <span class="emoji-top">🌸</span>
+    <div class="name">श्रुतिका</div>
+    <div class="divider"></div>
+    <p class="message">
+      काही गोष्टी सांगता येत नाहीत,<br/>
+      फक्त जाणवतात.<br/>
+      तू त्यातलीच एक आहेस.
+    </p>
+    <div class="flower">🌷 💜 🌷</div>
+  </div>
+
+  <script>
+    // Generate stars
+    var starsContainer = document.getElementById('stars');
+    for (var i = 0; i < 90; i++) {
+      var star = document.createElement('div');
+      star.className = 'star';
+      var size = Math.random() * 2.5 + 0.5;
+      star.style.width  = size + 'px';
+      star.style.height = size + 'px';
+      star.style.left   = Math.random() * 100 + '%';
+      star.style.top    = Math.random() * 100 + '%';
+      star.style.animationDuration  = (Math.random() * 3 + 2) + 's';
+      star.style.animationDelay     = (Math.random() * 4) + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // Generate falling petals
+    var petals = ['🌸', '🌷', '✨', '💜', '🩷'];
+    for (var j = 0; j < 14; j++) {
+      (function(index) {
+        var petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.textContent = petals[index % petals.length];
+        petal.style.left = (Math.random() * 100) + '%';
+        petal.style.animationDuration = (Math.random() * 8 + 6) + 's';
+        petal.style.animationDelay    = (Math.random() * 8) + 's';
+        petal.style.fontSize          = (Math.random() * 0.8 + 1) + 'rem';
+        document.body.appendChild(petal);
+      })(j);
+    }
+  </script>
+</body>
+</html>
